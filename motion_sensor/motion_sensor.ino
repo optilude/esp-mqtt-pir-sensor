@@ -52,10 +52,8 @@ void setup() {
   Serial.begin(115200);
   delay(10);
 
-  ArduinoOTA.setPort(OTAport);
-
   ArduinoOTA.setHostname(SENSORNAME);
-
+  ArduinoOTA.setPort(OTAport);
   ArduinoOTA.setPassword((const char *)OTApassword);
 
   Serial.print("calibrating sensor ");
@@ -169,21 +167,21 @@ void loop() {
   
   if (!client.connected()) {
     // reconnect();
-    software_Reset();
+    software_reset();
   }
   client.loop();
 
   //PIR CODE
-  pirValue = digitalRead(PIRPIN); //read state of the
+  pirValue = digitalRead(PIRPIN); //read state of the PIR sensor
 
   if (pirValue == LOW && pirStatus != PIR_OFF) {
     motionStatus = "off";
-    sendState();
     pirStatus = PIR_OFF;
+    sendState();
   } else if (pirValue == HIGH && pirStatus != PIR_ON) {
     motionStatus = "on";
-    sendState();
     pirStatus = PIR_ON;
+    sendState();
   }
   
   delay(1000);
@@ -191,7 +189,7 @@ void loop() {
 }
 
 /****reset***/
-void software_Reset() { // Restarts program from beginning but does not reset the peripherals and registers
+void software_reset() { // Restarts program from beginning but does not reset the peripherals and registers
   Serial.print("resetting");
   ESP.reset(); 
 }
