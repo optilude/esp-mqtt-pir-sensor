@@ -9,7 +9,7 @@ is detected/no longer detected.
 
 Original video tutorial - <https://youtu.be/jpjfVc-9IrQ>
 
-## Building
+## Building
 
 You need to use the Arduino IDE to build `motion_sensor.ino` from source. Before
 you can do so, you must copy `secrets.h.template` to a new file called
